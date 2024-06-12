@@ -1,5 +1,18 @@
+import Content from "@/components/layouts/Content";
+import Footer from "@/components/layouts/Footer";
+import Header from "@/components/layouts/Header";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/assets/css/bootstrap.min.css"
+import "@/assets/css/ticker-style.css"
+import "@/assets/css/flaticon.css"
+import "@/assets/css/slicknav.css"
+import "@/assets/css/animate.min.css"
+import "@/assets/css/magnific-popup.css"
+import "@/assets/css/fontawesome-all.min.css"
+import "@/assets/css/themify-icons.css"
+import "@/assets/css/slick.css"
+import "@/assets/css/nice-select.css"
+import "@/assets/css/style.css"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +24,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Header />
+        <Content>{children}</Content>
+        <Footer />
+      </body>
     </html>
   );
 }
