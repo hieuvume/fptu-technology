@@ -21,7 +21,7 @@ export default function Home() {
                     <div className="trend-top-cap">
                       <span>Appetizers</span>
                       <h2>
-                        <a href="details.html">
+                        <a href="/post_detail">
                           Welcome To The Best Model Winner
                           <br /> Contest At Look of the year
                         </a>
@@ -43,7 +43,7 @@ export default function Home() {
                         <div className="trend-bottom-cap">
                           <span className="color1">Lifestyple</span>
                           <h4>
-                            <a href="details.html">
+                            <a href="/post_detail">
                               Get the Illusion of Fuller Lashes by “Mascng.”
                             </a>
                           </h4>
@@ -62,7 +62,7 @@ export default function Home() {
                           <span className="color2">Sports</span>
                           <h4 />
                           <h4>
-                            <a href="details.html">
+                            <a href="/post_detail">
                               Get the Illusion of Fuller Lashes by “Mascng.”
                             </a>
                           </h4>
@@ -80,7 +80,7 @@ export default function Home() {
                         <div className="trend-bottom-cap">
                           <span className="color3">Travels</span>
                           <h4>
-                            <a href="details.html">
+                            <a href="/post_detail">
                               {" "}
                               Welcome To The Best Model Winner Contest
                             </a>
@@ -100,7 +100,7 @@ export default function Home() {
                   <div className="trand-right-cap">
                     <span className="color1">Concert</span>
                     <h4>
-                      <a href="details.html">
+                      <a href="/post_detail">
                         Welcome To The Best Model Winner Contest
                       </a>
                     </h4>
@@ -113,7 +113,7 @@ export default function Home() {
                   <div className="trand-right-cap">
                     <span className="color3">sea beach</span>
                     <h4>
-                      <a href="details.html">
+                      <a href="/post_detail">
                         Welcome To The Best Model Winner Contest
                       </a>
                     </h4>
@@ -126,7 +126,7 @@ export default function Home() {
                   <div className="trand-right-cap">
                     <span className="color2">Bike Show</span>
                     <h4>
-                      <a href="details.html">
+                      <a href="/post_detail">
                         Welcome To The Best Model Winner Contest
                       </a>
                     </h4>
@@ -139,7 +139,7 @@ export default function Home() {
                   <div className="trand-right-cap">
                     <span className="color4">See beach</span>
                     <h4>
-                      <a href="details.html">
+                      <a href="/post_detail">
                         Welcome To The Best Model Winner Contest
                       </a>
                     </h4>
@@ -152,7 +152,7 @@ export default function Home() {
                   <div className="trand-right-cap">
                     <span className="color1">Skeping</span>
                     <h4>
-                      <a href="details.html">
+                      <a href="/post_detail">
                         Welcome To The Best Model Winner Contest
                       </a>
                     </h4>
