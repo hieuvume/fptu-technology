@@ -1,4 +1,27 @@
+"use client";
+
+import articleApi from "@/api/articleApi";
+import categoryApi from "@/api/categoryApi";
+import { useState } from "react";
+import useSWR from "swr";
+import NewArticle from "./NewArticle";
+
 const WhatsNew = () => {
+  const { data: categories, isLoading } = useSWR("/api/categories", () =>
+    categoryApi.getAll()
+  );
+  const [currentCategory, setCurrentCategory] = useState(null);
+
+  const { data: articles, articleLoading } = useSWR(
+    `/api/articles/${currentCategory}`,
+    () => {
+      if (currentCategory) {
+        return categoryApi.getArticles(currentCategory);
+      }
+      return articleApi.getAll();
+    }
+  );
+
   return (
     <section className="whats-news-area pt-50 pb-20">
       <div className="container">
@@ -15,25 +38,29 @@ const WhatsNew = () => {
                   <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
                       <span
-                        className="nav-item nav-link cursor-pointer active"
+                        className={`nav-item nav-link cursor-pointer ${
+                          currentCategory === null ? "active" : ""
+                        }`}
+                        onClick={() => setCurrentCategory(null)}
                       >
                         All
                       </span>
-                      <a
-                        className="nav-item nav-link cursor-pointer"
-                      >
-                        TECH
-                      </a>
-                      <a
-                        className="nav-item nav-link cursor-pointer"
-                      >
-                        LEGAL
-                      </a>
-                      <a
-                        className="nav-item nav-link cursor-pointer"
-                      >
-                        BOARDS
-                      </a>
+                      {categories?.map((category) => (
+                        <a
+                          key={category._id}
+                          className={`nav-item nav-link cursor-pointer ${
+                            currentCategory === category._id ? "active" : ""
+                          }`}
+                          onClick={() => setCurrentCategory(category._id)}
+                        >
+                          {category.categoryName}
+                        </a>
+                      ))}
+                      {isLoading && (
+                        <a className="nav-item nav-link cursor-pointer">
+                          Loading...
+                        </a>
+                      )}
                     </div>
                   </nav>
                 </div>
@@ -41,95 +68,16 @@ const WhatsNew = () => {
             </div>
             <div className="row">
               <div className="col-12">
-                {/* Nav Card */}
                 <div className="tab-content" id="nav-tabContent">
-                  {/* card one */}
-                  <div
-                    className="tab-pane fade show active"
-                    id="nav-home"
-                    role="tabpanel"
-                    aria-labelledby="nav-home-tab"
-                  >
+                  <div className="tab-pane fade show active">
                     <div className="whats-news-caption">
                       <div className="row">
-                        <div className="col-lg-4 col-md-4">
-                          <div className="single-what-news mb-100">
-                            <div className="what-img">
-                              <img
-                                src="https://www.reuters.com/resizer/v2/INVGTSTEJVPUBJPQXDIRJ52G5I.jpg?auth=c77f9fe5c1f0f4fa792fb59887d495220e93fadd64dc5114e05d4ed871c47f74&width=480&quality=80"
-                                alt=""
-                              />
-                            </div>
-                            <div className="what-cap">
-                              <span className="color1">
-                                Artificial Intelligence
-                              </span>
-                              <h4>
-                                <a href="/post_detail">
-                                  Microsoft to delay release of Recall AI
-                                  feature on security concerns
-                                </a>
-                              </h4>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-4 col-md-4">
-                          <div className="single-what-news mb-100">
-                            <div className="what-img">
-                              <img
-                                src="https://www.reuters.com/resizer/v2/STZKNTHATFIBRCGNDXS372CPZM.jpg?auth=a8a912353adf05054df47163860c332a3c53ba88379affecdc3c2372b15e4e44&width=480&quality=80"
-                                alt=""
-                              />
-                            </div>
-                            <div className="what-cap">
-                              <span className="color1">Technology</span>
-                              <h4>
-                                <a href="/post_detail">
-                                  GameStop postpones shareholder meet to June 17
-                                  after technical difficulties
-                                </a>
-                              </h4>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-4 col-md-4">
-                          <div className="single-what-news mb-100">
-                            <div className="what-img">
-                              <img
-                                src="https://www.reuters.com/resizer/v2/XLV3XLLCPRKLDPVMWRQUB6G6IA.jpg?auth=ad5447574ca6c933947cb0367717ddf255beb84482068d61f393408ca55c1adc&width=480&quality=80"
-                                alt=""
-                              />
-                            </div>
-                            <div className="what-cap">
-                              <span className="color1">Technology</span>
-                              <h4>
-                                <a href="/post_detail">
-                                  Adobe raises full-year revenue forecast on
-                                  robust software demand
-                                </a>
-                              </h4>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-4 col-md-4">
-                          <div className="single-what-news mb-100">
-                            <div className="what-img">
-                              <img
-                                src="https://www.reuters.com/resizer/v2/J6YVDZW6EVKLTLKC43XUZYVLHY.jpg?auth=e282ffc771df7c17014ebeb05f84732eb1ee63f126034a0f5c34586c759f3fba&width=480&quality=80"
-                                alt=""
-                              />
-                            </div>
-                            <div className="what-cap">
-                              <span className="color1">Night party</span>
-                              <h4>
-                                <a href="/post_detail">
-                                  Roaring Kitty nearly doubles GameStop holdings
-                                  to 9 million shares, Reddit post shows
-                                </a>
-                              </h4>
-                            </div>
-                          </div>
-                        </div>
+                        {articleLoading && (
+                          <div className="text-center">Loading...</div>
+                        )}
+                        {articles?.map((article) => (
+                          <NewArticle index={article._id} article={article} />
+                        ))}
                       </div>
                     </div>
                   </div>

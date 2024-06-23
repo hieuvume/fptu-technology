@@ -4,7 +4,7 @@ const LargeTrendingArticle = ({ article }) => {
       <div className="trend-top-img">
         <img src={article.thumbnail} alt="Article Thumbnail" />
         <div className="trend-top-cap">
-          <span>HOT</span>
+          <span>{article?.category?.categoryName}</span>
           <h2>
             <a href={`/article/${article.slug}`}>{article.title}</a>
           </h2>

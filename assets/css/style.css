@@ -69,7 +69,7 @@
   background: #fff;
   color: #fc3f00 !important;
   display: inline-block;
-  padding: 18px 44px;
+  padding: 9px 44px;
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -5245,10 +5245,6 @@ hr {
 
 .form-contact label {
   font-size: 14px
-}
-
-.form-contact .form-group {
-  margin-bottom: 30px
 }
 
 .form-contact .form-control {

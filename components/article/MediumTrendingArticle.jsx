@@ -6,7 +6,7 @@ const MediumTrendingArticle = ({ article }) => {
           <img src={article.thumbnail} alt="" />
         </div>
         <div className="trend-bottom-cap">
-          <span className="color1">Regulatory Oversight</span>
+          <span className="color1">{article?.category?.categoryName}</span>
           <h4>
             <a href={`/article/${article.slug}`}>{article.title}</a>
           </h4>
