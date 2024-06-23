@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
     setUser(null);
     removeAccessToken()
+    window.location.href = '/';
   }
 
   const isAuthenticated = () => {

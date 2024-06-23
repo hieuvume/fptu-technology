@@ -12,6 +12,9 @@ const authApi = {
   },
   me: () => {
     return api.get('/auth/me')
+  },
+  changePassword:(data)=>{
+    return api.post('/auth/change-password',data)
   }
 }
 
