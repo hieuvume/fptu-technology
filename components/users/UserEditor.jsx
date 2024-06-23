@@ -2,6 +2,9 @@
 import { Form, Formik } from "formik";
 import InputField from "../forms/InputField";
 import * as Yup from "yup";
+import { formatDate } from "@/utils";
+import SelectField from "../forms/SelectField";
+import { OPTION_ROLES } from "@/constants";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
@@ -21,9 +24,7 @@ const UserEditor = ({ user, onSubmit }) => {
             username: user?.username || "",
             fullName: user?.fullName || "",
             email: user?.email || "",
-            dateOfBirth: user?.dateOfBirth
-              ? new Date(user?.dateOfBirth)?.toLocaleDateString("vi-vn")
-              : "",
+            dateOfBirth: formatDate(user?.dateOfBirth),
             role: user?.role || "",
           }}
           onSubmit={onSubmit}
@@ -32,13 +33,19 @@ const UserEditor = ({ user, onSubmit }) => {
             <Form onSubmit={handleSubmit}>
               <InputField label="Username" name="username" />
               <InputField label="Full name" name="fullName" />
+              <InputField
+                label="Password"
+                name="password"
+                type="password"
+                placeholder={user ? "Leave blank to keep the old password" : "Enter new password"}
+              />
               <InputField label="Email" name="email" />
               <InputField
                 label="Date of birth"
                 name="dateOfBirth"
-                type={user?.dateOfBirth ? "text" : "date"}
+                type={"date"}
               />
-              <InputField label="Role" name="role" />
+              <SelectField label="Role" name="role" options={OPTION_ROLES} />
               <button type="submit" className="btn btn-primary">
                 Save
               </button>

@@ -33,6 +33,26 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setLoading(false))
   }
 
+  const isAdmin = () => {
+    return user?.role === 'ADMIN';
+  }
+
+  const isModerator = () => {
+    return user?.role === 'MODERATOR';
+  }
+
+  const isAuthor = () => {
+    return user?.role === 'AUTHOR';
+  }
+
+  const isContributor = () => {
+    return user?.role === 'CONTRIBUTOR';
+  }
+
+  const isUser = () => {
+    return user?.role === 'USER';
+  }
+
   const login = (user) => {
     localStorage.setItem('user', JSON.stringify(user));
     setUser(user);
@@ -49,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, login, logout, loading, isAuthenticated, isAdmin, isModerator, isUser, isAuthor, isContributor }}>
       {children}
     </AuthContext.Provider>
   )

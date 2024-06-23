@@ -23,7 +23,7 @@ const DashboardWrapper = ({ children }) => {
                               Hello, {user.username}
                             </Link>
                           </li>
-                          {user.role === "USER" && (
+                          {user.role !== "USER" && (
                             <li>
                               <Link
                                 href="/dashboard"

@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
 import DashboardWrapper from "./DashboardWrapper";
+import useAuth from "@/provider/AuthProvider";
 
 const DashboardHeader = () => {
+  const { isAdmin, isModerator, isAuthor } = useAuth();
   return (
     <DashboardWrapper>
       <div className="header-bottom header-sticky">
@@ -22,16 +24,22 @@ const DashboardHeader = () => {
                     </li>
                     <li>
                       <Link href="/dashboard">Dashboard</Link>
-                    </li> 
-                    <li>
-                      <Link href="/dashboard/users">Users</Link>
                     </li>
-                    <li>
-                      <Link href="/dashboard/categories">Categories</Link>
-                    </li>
-                    <li>
-                      <Link href="/dashboard/articles">Articles</Link>
-                    </li>
+                    {isAdmin() && (
+                      <>
+                        <li>
+                          <Link href="/dashboard/users">Users</Link>
+                        </li>
+                        <li>
+                          <Link href="/dashboard/categories">Categories</Link>
+                        </li>
+                      </>
+                    )}
+                    {(isAdmin() || isModerator() || isAuthor()) && (
+                      <li>
+                        <Link href="/dashboard/articles">Articles</Link>
+                      </li>
+                    )}
                   </ul>
                 </nav>
               </div>

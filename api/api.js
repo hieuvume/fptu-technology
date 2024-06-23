@@ -17,30 +17,17 @@ export function setupAxios(axios) {
   axios.interceptors.response.use(
     function (response) {
       if (response && response.data) {
-        if (response.data.message) {
-          if (response.data.report) {
-            Report.success(response.data.message ?? 'Thực hiện thành công')
-          }
-          if (response.data.notify) {
-            Notify.success(response.data.message ?? 'Thực hiện thành công')
-          }
-        }
         return response.data
       }
       return response
     },
     function (error) {
       if (error.response && error.response.data) {
-        if (error.response.data.message) {
-          if (error.response.data.errors) {
-            const errors = error.response.data.errors
-            for (const key in errors) {
-              if (errors.hasOwnProperty(key)) {
-                const element = errors[key]
-                Report.failure(element[0])
-              }
-            }
-          }
+        if (error.response.data.errors && error.response.data.errors.length > 0) {
+          return Promise.reject({
+            message: error.response.data.errors[0].msg,
+            errors: error.response.data.errors,
+          })
         }
         return Promise.reject(error.response.data)
       }
