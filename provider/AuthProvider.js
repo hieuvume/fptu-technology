@@ -6,6 +6,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const [firstLoaded, setFirstLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
@@ -30,7 +31,10 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         localStorage.removeItem('user');
       })
-      .finally(() => setLoading(false))
+      .finally(() => {
+        setLoading(false)
+        setFirstLoaded(true)
+      })
   }
 
   const isAdmin = () => {
@@ -69,7 +73,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading, isAuthenticated, isAdmin, isModerator, isUser, isAuthor, isContributor }}>
+    <AuthContext.Provider value={{ user, login, logout, loading, isAuthenticated, isAdmin, isModerator, isUser, isAuthor, isContributor, firstLoaded }}>
       {children}
     </AuthContext.Provider>
   )

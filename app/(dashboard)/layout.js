@@ -3,6 +3,7 @@ import DashboardHeader from "@/components/layouts/DashboardHeader";
 import Footer from "@/components/layouts/Footer";
 
 const DashboardLayout = ({ children }) => {
+
   return (
     <section>
       <DashboardHeader />
