@@ -6,7 +6,7 @@ const TableContext = createContext();
 
 export const TableProvider = ({ columns, tableKey, fetcher, children }) => {
 
-  const { data, error } = useSWR(tableKey, fetcher);
+  const { data, error, mutate } = useSWR(tableKey, fetcher);
 
   const tableInstance = useTable({
     columns,
@@ -17,6 +17,7 @@ export const TableProvider = ({ columns, tableKey, fetcher, children }) => {
     ...tableInstance,
     isLoading: !error && !data,
     isError: error,
+    mutate,
   }), [tableInstance, data, error]);
 
   return (
