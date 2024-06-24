@@ -6,26 +6,6 @@ const About = () => {
             <div className="about-area">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-12">
-                            <div className="trending-tittle">
-                                <strong>Trending now</strong>
-                                <div className="trending-animated">
-                                    <ul id="js-news" className="js-hidden">
-                                        <li className="news-item">
-                                            Bangladesh dolor sit amet, consectetur adipisicing elit.
-                                        </li>
-                                        <li className="news-item">
-                                            Spondon IT sit amet, consectetur.......
-                                        </li>
-                                        <li className="news-item">
-                                            Rem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
                         <div className="about-right mb-90">
                             <div className="about-img">
                                 {/* <img src="assets\img\post\about_heor.jpg" alt="" /> */}
@@ -58,11 +38,11 @@ const About = () => {
                                 <div className="section-tittle mb-30 pt-30">
                                 <h3>Project Team Members</h3>
                                 <ul className="section-tittle mb-30 pt-30" >
-                                    <li>Nguyen Van A - Software Engineering Major</li>
-                                    <li>Tran Thi B - Information Security Major</li>
-                                    <li>Le Van C - Computer Networks Major</li>
-                                    <li>Pham Thi D - Information Systems Major</li>
-                                    <li>Hoang Van E - Artificial Intelligence Major</li>
+                                    <li>Vũ Ngọc Minh Quân - HE160804</li>
+                                    <li>Nguyễn Kim Chung - HE160935</li>
+                                    <li>Vũ Anh Tú - HE161770</li>
+                                    <li>Vũ Trung Hiếu - HE163586</li>
+                                    <li>Trương Xuân Dũng - SE160459</li>
                                 </ul>
                                 </div>
                                 <p className="about-pera1 mb-25">
