@@ -7,7 +7,7 @@ const SelectField = ({ label, name, options, ...props }) => {
     <div className="form-group">
       <label>{label}</label>
       <select name={name} className="form-control" {...field} {...props}>
-        {options.map((option) => (
+        {options?.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
