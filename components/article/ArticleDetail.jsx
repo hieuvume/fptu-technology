@@ -29,7 +29,7 @@ const ArticleDetail = ({ article }) => {
                 </div>
                 <SocialShare />
               </div>
-              <CommentForm />
+              <CommentForm article_id={article?._id} />
             </div>
             <div className="col-lg-3">
               <div className="section-tittle mb-40">
