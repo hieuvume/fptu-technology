@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { getAccessToken } from "@/utils/auth"; // Import hàm getAccessToken từ auth.js
+import { getAccessToken } from "@/utils/auth"; 
 
 const CommentForm = ({ article_id }) => {
   const [commentData, setCommentData] = useState({
@@ -34,7 +34,7 @@ const CommentForm = ({ article_id }) => {
       console.log('Comment created:', response.data);
       setCommentData({ commentText: '' }); 
       setSuccessMessage('Comment successfully.'); // Thiết lập thông báo thành công
-      
+      window.location.reload(); // Load lại trang sau khi gửi thành công
     } catch (error) {
       console.error('Error creating comment:', error);
       if (error.response && error.response.status === 400) {
@@ -62,7 +62,7 @@ const CommentForm = ({ article_id }) => {
                   id="commentText"
                   cols={30}
                   rows={4}
-                  placeholder="Enter Comment"
+                  placeholder="Enter Message"
                   value={commentData.commentText}
                   onChange={handleChange}
                   required
