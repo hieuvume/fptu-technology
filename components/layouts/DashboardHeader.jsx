@@ -40,6 +40,11 @@ const DashboardHeader = () => {
                         <Link href="/dashboard/articles">Articles</Link>
                       </li>
                     )}
+                    {(isAdmin()) && (
+                      <li>
+                        <Link href="/dashboard/applications">Applications</Link>
+                      </li>
+                    )}
                   </ul>
                 </nav>
               </div>

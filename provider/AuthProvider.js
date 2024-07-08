@@ -18,6 +18,9 @@ export const AuthProvider = ({ children }) => {
     const token = getAccessToken()
     if (token && token.access_token) {
       loadUser()
+    } else {
+      setLoading(false)
+      setFirstLoaded(true)
     }
   }, []);
 
