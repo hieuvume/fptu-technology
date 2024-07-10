@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import userApi from "@/api/userApi";
 import Table from "@/components/table/Table";
 import { TableProvider } from "@/provider/TableProvider";
@@ -19,7 +19,7 @@ const columns = [
   {
     Header: 'Date of Birth',
     accessor: 'dateOfBirth',
-    Cell: ({ value }) => new Date(value).toLocaleDateString('vi-VN'),
+    Cell: ({ value }) => value ? new Date(value).toLocaleDateString('vi-VN') : '',
   },
   {
     Header: 'Role',
@@ -28,7 +28,7 @@ const columns = [
   {
     Header: 'Date Registered',
     accessor: 'dateRegistered',
-    Cell: ({ value }) => new Date(value).toLocaleString('vi-VN'),
+    Cell: ({ value }) => value ? new Date(value).toLocaleString('vi-VN') : '',
   },
   {
     Header: 'Action',

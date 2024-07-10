@@ -15,8 +15,13 @@ const columns = [
   },
   {
     Header: 'Category',
-    accessor: 'category', 
-    Cell: ({ value }) => value ? value.categoryName : '', 
+    accessor: 'category.categoryName', // Ensure this path matches the data structure
+    Cell: ({ value }) => value ? value : '',
+  },
+  {
+    Header: 'Author',
+    accessor: 'author.fullName', // Accessing the nested fullName property
+    Cell: ({ value }) => value ? value : '',
   },
   {
     Header: 'published',
