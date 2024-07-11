@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getAccessToken } from "@/utils/auth"; // Import hàm getAccessToken từ auth.js
+import { getAccessToken } from "@/utils/auth"; 
 
 const CommentList = ({ articleId }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { access_token } = getAccessToken(); // Lấy access_token từ localStorage hoặc cookies
+  const { access_token } = getAccessToken(); 
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -26,7 +26,7 @@ const CommentList = ({ articleId }) => {
     };
 
     fetchComments();
-  }, [articleId, access_token]); // Thay đổi articleId hoặc access_token sẽ kích hoạt fetchComments lại
+  }, [articleId, access_token]); 
 
   return (
     <div className="comment-list">
