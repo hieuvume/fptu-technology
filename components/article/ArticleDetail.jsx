@@ -1,6 +1,8 @@
 "use client";
 import useSWR from "swr";
 import CommentForm from "./CommentForm";
+import CommentList from "./CommentList";
+
 import articleApi from "@/api/articleApi";
 import SocialShare from "./SocialShare";
 import Link from "next/link";
@@ -29,7 +31,10 @@ const ArticleDetail = ({ article }) => {
                 </div>
                 <SocialShare />
               </div>
-              <CommentForm />
+              <CommentForm article_id={article?._id} />
+              {/* <CommentList  /> */}
+              <CommentList articleId={article?._id} />
+
             </div>
             <div className="col-lg-3">
               <div className="section-tittle mb-40">

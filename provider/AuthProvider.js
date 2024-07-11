@@ -11,11 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      setUser(JSON.parse(user));
-    }
-    const token = getAccessToken()
+    const token = getAccessToken();
     if (token && token.access_token) {
       loadUser()
     } else {
@@ -26,65 +22,85 @@ export const AuthProvider = ({ children }) => {
 
   const loadUser = () => {
     authApi.me().then((data) => {
-      const { user } = data
+      const { user } = data;
       setUser(user);
       localStorage.setItem('user', JSON.stringify(user));
     })
-      .catch(() => {
-        setUser(null);
-        localStorage.removeItem('user');
-      })
-      .finally(() => {
-        setLoading(false)
-        setFirstLoaded(true)
-      })
-  }
+    .catch(() => {
+      setUser(null);
+      localStorage.removeItem('user');
+    })
+    .finally(() => {
+      setLoading(false);
+      setFirstLoaded(true);
+    });
+  };
+
+  const updateUser = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
 
   const isAdmin = () => {
     return user?.role === 'ADMIN';
-  }
+  };
 
   const isModerator = () => {
     return user?.role === 'MODERATOR';
-  }
+  };
 
   const isAuthor = () => {
     return user?.role === 'AUTHOR';
-  }
+  };
 
   const isContributor = () => {
     return user?.role === 'CONTRIBUTOR';
-  }
+  };
 
   const isUser = () => {
     return user?.role === 'USER';
-  }
+  };
 
-  const login = (user) => {
-    localStorage.setItem('user', JSON.stringify(user));
-    setUser(user);
-  }
+  const login = (userData) => {
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser(userData);
+  };
 
   const logout = () => {
     localStorage.removeItem('user');
     setUser(null);
-    removeAccessToken()
+    removeAccessToken();
     window.location.href = '/';
-  }
+  };
 
   const isAuthenticated = () => {
     return user !== null;
-  }
+  };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading, isAuthenticated, isAdmin, isModerator, isUser, isAuthor, isContributor, firstLoaded }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        loading,
+        isAuthenticated,
+        isAdmin,
+        isModerator,
+        isUser,
+        isAuthor,
+        isContributor,
+        firstLoaded,
+        updateUser, 
+      }}
+    >
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
 const useAuth = () => {
   return useContext(AuthContext);
-}
+};
 
 export default useAuth;
