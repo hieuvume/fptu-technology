@@ -69,16 +69,29 @@ const DashboardWrapper = ({ children }) => {
           <div className="header-mid d-none d-md-block">
             <div className="container">
               <div className="row d-flex align-items-center">
-                <div className="col-xl-3 col-lg-3 col-md-3">
+                <div className="col-xl-3 col-lg-3 col-md-3 " >
                   <div className="logo">
                     <Link href="/">
                       <img src="/assets/img/logo.png" alt="" width={200} />
                     </Link>
+                
                   </div>
                 </div>
                 <div className="col-xl-9 col-lg-9 col-md-9">
                   <div className="header-banner f-right ">
-                    {/* <img src="/assets/img/hero/header_card.jpg" alt="" /> */}
+                  <input className="text-center"
+                      style={{
+                        width: "120%",
+                        padding: "10px",
+                        border: "none",
+                        margin: 0,
+                        height: "auto",
+                        borderRadius: "20px",
+                        backgroundColor: "#f0f0f5",
+                        fontSize: "14px"
+                      }}
+                      placeholder="Tìm sản các bài báo công nghệ"
+                    />
                   </div>
                 </div>
               </div>

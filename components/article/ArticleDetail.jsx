@@ -17,12 +17,12 @@ const ArticleDetail = ({ article }) => {
     <main>
       <div className="about-area">
         <div className="container">
-          <div className="row mt-4">
             <div className="col-lg-9">
+          <div className="row mt-4">
               <div className="about-right mb-10">
                 <div className="section-tittle mb-10">
                   <h3>{article.title}</h3>
-                </div>
+                </div> 
                 <div className="about-img">
                   <img src={article.thumbnail} />
                 </div>

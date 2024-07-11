@@ -11,7 +11,7 @@ const validationSchema = Yup.object().shape({
   category: Yup.string().required("Category is required"),
   published: Yup.boolean().required("Published status is required"),
   slug: Yup.string().required("Slug is required"),
-  thumbnail: Yup.string().required("Thumbnail URL is required"),
+  thumbnail: Yup.mixed().required("Thumbnail is required"),
 });
 
 const ArticlesEditor = ({ articles, onSubmit }) => {
@@ -24,6 +24,15 @@ const ArticlesEditor = ({ articles, onSubmit }) => {
     value: category._id,
   }));
 
+  const convertFileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result.split(",")[1]); // Get base64 part
+      reader.onerror = error => reject(error);
+    });
+  };
+
   return (
     <div className="card my-3">
       <div className="card-body">
@@ -35,16 +44,33 @@ const ArticlesEditor = ({ articles, onSubmit }) => {
             category: articles?.category?._id || "",
             published: articles?.published || false,
             slug: articles?.slug || "",
-            thumbnail: articles?.thumbnail || "",
+            thumbnail: null,
           }}
-          onSubmit={onSubmit}
+          onSubmit={async (values, actions) => {
+            let base64Thumbnail = "";
+            if (values.thumbnail) {
+              base64Thumbnail = await convertFileToBase64(values.thumbnail);
+            }
+            
+            const formData = {
+              title: values.title,
+              content: values.content,
+              category: values.category,
+              published: values.published,
+              slug: values.slug,
+              thumbnailBase64: base64Thumbnail,
+              thumbnailName: values.thumbnail.name,
+            };
+            
+            onSubmit(formData);
+            actions.setSubmitting(false);
+          }}
         >
-          {({ handleSubmit }) => (
+          {({ handleSubmit, setFieldValue }) => (
             <Form onSubmit={handleSubmit}>
               <InputField label="Title" name="title" />
               <div className="form-group">
                 <label htmlFor="content">Content</label>
-
                 <Field
                   as="textarea"
                   className="form-control"
@@ -54,21 +80,17 @@ const ArticlesEditor = ({ articles, onSubmit }) => {
               </div>
               <SelectField label="Category" name="category" options={options} />
               <InputField label="Slug" name="slug" />
-              <InputField label="Thumbnail URL" name="thumbnail" />
-              {/* <div className="form-group">
-                <label htmlFor="published" className="form-check-label">
-                  Published
-                </label>
+              <div className="form-group">
+                <label htmlFor="thumbnail">Thumbnail</label>
                 <input
-                  style={{ marginLeft: "10px" }}
-                  type="checkbox"
-                  label="Published"
-                  name="published"
-                  id="published"
-                  className="form-check-input"
+                  type="file"
+                  name="thumbnail"
+                  className="form-control"
+                  onChange={(event) => {
+                    setFieldValue("thumbnail", event.currentTarget.files[0]);
+                  }}
                 />
-              </div> */}
-
+              </div>
               <button type="submit" className="btn btn-primary">
                 Save
               </button>
