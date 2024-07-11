@@ -1,12 +1,11 @@
 "use client";
 import useSWR from "swr";
 import CommentForm from "./CommentForm";
-import CommentList from "./CommentList";
-
 import articleApi from "@/api/articleApi";
 import SocialShare from "./SocialShare";
 import Link from "next/link";
 import RelatedArticle from "./RelatedArticle";
+import CommentList from "./CommentList";
 
 const ArticleDetail = ({ article }) => {
   const { data, isLoading } = useSWR(`/articles/related/${article.slug}`, () =>
@@ -17,12 +16,12 @@ const ArticleDetail = ({ article }) => {
     <main>
       <div className="about-area">
         <div className="container">
-            <div className="col-lg-9">
           <div className="row mt-4">
+            <div className="col-lg-9">
               <div className="about-right mb-10">
                 <div className="section-tittle mb-10">
                   <h3>{article.title}</h3>
-                </div> 
+                </div>
                 <div className="about-img">
                   <img src={article.thumbnail} />
                 </div>
@@ -32,9 +31,7 @@ const ArticleDetail = ({ article }) => {
                 <SocialShare />
               </div>
               <CommentForm article_id={article?._id} />
-              {/* <CommentList  /> */}
               <CommentList articleId={article?._id} />
-
             </div>
             <div className="col-lg-3">
               <div className="section-tittle mb-40">
