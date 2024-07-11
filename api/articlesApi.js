@@ -13,6 +13,12 @@ const articlesApi = {
   update: (data) => {
     return api.put(`/articles/${data.id}`, data)
   },
+  getPendingArticles: (data) => {
+    return api.get('/dashboard/pending', data)
+  },
+  approveArticle: (data) => {
+    return api.put(`/dashboard/pending/${data._id}`, data)
+  }
 }
 
 export default articlesApi

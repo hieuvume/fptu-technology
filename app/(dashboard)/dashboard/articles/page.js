@@ -51,6 +51,7 @@ const ArticlesPage = () => {
         <h3>
           Articles
         </h3>
+        <a href="/dashboard/articles/pending" className="btn btn-primary btn-sm">Pending</a>
         <a href="/dashboard/articles/create" className="btn btn-primary btn-sm">Create</a>
       </div>
       <TableProvider columns={columns} tableKey="articles" fetcher={() => articlesApi.getAll()}>
