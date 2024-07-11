@@ -17,7 +17,9 @@ const Header = () => {
                 <Link href="/">
                   <img src="/assets/img/logo/logo.png" alt="" />
                 </Link>
+                
               </div>
+
               {/* Main-menu */}
               <div className="main-menu d-none d-md-block">
                 <nav>
