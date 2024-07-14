@@ -2,6 +2,7 @@
 import articleApi from "@/api/articleApi";
 import LargeTrendingArticle from "@/components/article/LargeTrendingArticle";
 import MediumTrendingArticle from "@/components/article/MediumTrendingArticle";
+import SmallNewArticle from "@/components/article/SmallNewArticles";
 import SmallTrendingArticle from "@/components/article/SmallTrendingArticle";
 import WhatsNew from "@/components/article/WhatsNew";
 import useSWR from "swr";
@@ -35,7 +36,7 @@ export default function Home() {
               </div>
               <div className="col-lg-4">
                 {data?.small?.map((article, index) => (
-                  <SmallTrendingArticle
+                  <SmallNewArticle
                     key={index}
                     article={article}
                   />

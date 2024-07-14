@@ -40,7 +40,7 @@ const CommentForm = ({ article_id }) => {
       if (error.response && error.response.status === 400) {
         setError(error.response.data.message); // Hiển thị thông báo lỗi từ server
       } else {
-        setError('An error occurred while creating comment.');
+        setError('An error comment. Please login to comment.');
       }
     } finally {
       setLoading(false);

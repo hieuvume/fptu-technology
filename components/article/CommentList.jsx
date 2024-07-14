@@ -53,7 +53,7 @@ const CommentList = ({ articleId }) => {
     } catch (error) {
       setError("Error deleting comment");
     } finally {
-      setShowModal(false); // Close modal after deletion (whether successful or not)
+      setShowModal(false); 
     }
   };
   
