@@ -1,57 +1,56 @@
 'use client';
 import applicationApi from "@/api/applicationApi";
-import articlesApi from "@/api/articlesApi";
-import Table from "@/components/table/Table";
-import { TableProvider } from "@/provider/TableProvider";
+import { PaginationTable } from "@/provider/PaginationTable";
 
 const columns = [
   {
-    Header: 'User',
-    accessor: 'user_id',
-    Cell: ({ value }) => value ? value.fullName : '',
+    name: 'User',
+    selector: 'user_id',
+    cell: row => row.user_id ? row.user_id.fullName : '',
   },
   {
-    Header: 'Specialty',
-    accessor: 'specialty',
+    name: 'Specialty',
+    selector: 'specialty',
   },
   {
-    Header: 'Experience',
-    accessor: 'experience',
-    Cell: ({ value }) => `${value} year(s)`,
+    name: 'Experience',
+    selector: 'experience',
+    cell: row => `${row.experience} year(s)`,
   },
   {
-    Header: 'Example',
-    accessor: 'example',
+    name: 'Example',
+    selector: 'example',
   },
   {
-    Header: 'Description',
-    accessor: 'description',
-    Cell: ({ value }) => value.length > 50 ? value.slice(0, 50) + '...' : value,
+    name: 'Description',
+    selector: 'description',
+    cell: row => row.description.length > 50 ? row.description.slice(0, 50) + '...' : row.description,
   },
   {
-    Header: 'Social links',
-    accessor: 'social_links',
+    name: 'Social links',
+    selector: 'social_links',
   },
   {
-    Header: 'Status',
-    accessor: 'status',
-    Cell: ({ value }) => <span className={`text-${value == 'rejected' ? 'danger' : value == 'pending' ? 'warning' : 'success'}`} style={{ fontWeight: 'bold' }}>{value.toUpperCase()}</span>,
+    name: 'Status',
+    selector: 'status',
+    sortable: true,
+    cell: row => <span className={`text-${row.status == 'rejected' ? 'danger' : row.status == 'pending' ? 'warning' : 'success'}`} style={{ fontWeight: 'bold' }}>{row.status.toUpperCase()}</span>,
   },
   {
-    Header: 'Created At',
-    accessor: 'created_at',
-    Cell: ({ value }) => new Date(value).toLocaleString('vi-VN'),
+    name: 'Created At',
+    selector: 'created_at',
+    sortable: true,
+    cell: row => new Date(row.created_at).toLocaleString('vi-VN'),
   },
   {
-    Header: 'Action',
-    id: 'action',
-    Cell: ({ row }) => (
+    name: 'Action',
+    cell: row => (
       <div className="d-flex">
-        <a href={`/dashboard/applications/${row.original._id}`} className="btn btn-sm btn-warning">View</a>
+        <a href={`/dashboard/applications/${row._id}`} className="btn btn-sm btn-warning">View</a>
       </div>
     ),
   }
-];
+]
 
 const ApplicationsPage = () => {
   return (
@@ -61,9 +60,7 @@ const ApplicationsPage = () => {
           Applications
         </h3>
       </div>
-      <TableProvider columns={columns} tableKey="applications" fetcher={() => applicationApi.getAll()}>
-        <Table />
-      </TableProvider>
+      <PaginationTable columns={columns} tableKey="applications" fetcher={() => applicationApi.getAll()} />
     </div>
   );
 }

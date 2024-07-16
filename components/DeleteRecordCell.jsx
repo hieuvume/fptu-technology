@@ -1,4 +1,4 @@
-import { useTableContext } from "@/provider/TableProvider";
+import { useTableContext } from "@/provider/PaginationTable";
 
 const { Confirm } = require("notiflix");
 

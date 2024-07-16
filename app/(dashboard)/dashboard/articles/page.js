@@ -1,44 +1,45 @@
 'use client';
 import articlesApi from "@/api/articlesApi";
-import Table from "@/components/table/Table";
-import { TableProvider } from "@/provider/TableProvider";
+import { PaginationTable } from "@/provider/PaginationTable";
+import { getArticleColor } from "@/utils";
 
 const columns = [
   {
-    Header: 'Title',
-    accessor: 'title',
+    name: 'Title',
+    selector: 'title',
   },
   {
-    Header: 'Content',
-    accessor: 'content',
-    Cell: ({ value }) => value.length > 50 ? value.slice(0, 50) + '...' : value,
+    name: 'Content',
+    selector: 'content',
+    cell: (row) => row.content.length > 50 ? row.content.slice(0, 50) + '...' : row.content,
   },
   {
-    Header: 'Category',
-    accessor: 'category.categoryName', // Ensure this path matches the data structure
-    Cell: ({ value }) => value ? value : '',
+    name: 'Category',
+    selector: 'category.categoryName',
+    cell: (row) => row.category.categoryName,
   },
   {
-    Header: 'Author',
-    accessor: 'author.fullName', // Accessing the nested fullName property
-    Cell: ({ value }) => value ? value : '',
+    name: 'Author',
+    selector: 'author.fullName',
+    cell: (row) => row.author.fullName,
   },
   {
-    Header: 'published',
-    accessor: 'published',
-    Cell: ({ value }) => value ? 'True' : 'False',
+    name: 'Publication Date',
+    selector: 'publicationDate',
+    sortable: true,
+    cell: (row) => new Date(row.publicationDate).toLocaleString('vi-VN'),
   },
   {
-    Header: 'Publication Date',
-    accessor: 'publicationDate',
-    Cell: ({ value }) => new Date(value).toLocaleString('vi-VN'),
+    name: 'Status',
+    selector: 'status',
+    sortable: true,
+    cell: (row) => <span className={`text-${getArticleColor(row.status)}`} style={{ fontWeight: 'bold' }}>{row?.status?.toUpperCase()}</span>,
   },
   {
-    Header: 'Action',
-    id: 'action',
-    Cell: ({ row }) => (
+    name: 'Action',
+    cell: (row) => (
       <div className="d-flex">
-        <a href={`/dashboard/articles/${row.original._id}`} className="btn btn-sm btn-warning">Edit</a>
+        <a href={`/dashboard/articles/${row._id}`} className="btn btn-sm btn-warning">Edit</a>
       </div>
     ),
   }
@@ -51,12 +52,9 @@ const ArticlesPage = () => {
         <h3>
           Articles
         </h3>
-        <a href="/dashboard/articles/pending" className="btn btn-primary btn-sm">Pending</a>
         <a href="/dashboard/articles/create" className="btn btn-primary btn-sm">Create</a>
       </div>
-      <TableProvider columns={columns} tableKey="articles" fetcher={() => articlesApi.getAll()}>
-        <Table />
-      </TableProvider>
+      <PaginationTable columns={columns} tableKey="articles" fetcher={() => articlesApi.getManageArticles()} />
     </div>
   );
 }

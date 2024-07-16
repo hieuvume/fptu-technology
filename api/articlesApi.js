@@ -18,6 +18,14 @@ const articlesApi = {
   },
   approveArticle: (data) => {
     return api.put(`/dashboard/pending/${data._id}`, data)
+  },
+  getManageArticles: (data) => {
+    return api.get('/articles/manage', data)
+  },
+  reviewArticle: (id, state) => {
+    return api.put(`/articles/${id}/review`, {
+      state
+    });
   }
 }
 

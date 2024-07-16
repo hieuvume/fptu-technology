@@ -82,7 +82,6 @@ const WhatsNew = () => {
                     </div>
                   </div>
                 </div>
-                {/* End Nav Card */}
               </div>
             </div>
           </div>

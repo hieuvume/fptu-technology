@@ -1,3 +1,5 @@
+import { limitContent } from "@/utils";
+
 const LargeTrendingArticle = ({ article }) => {
   return (
     <div className="trending-top mb-30">
@@ -8,6 +10,7 @@ const LargeTrendingArticle = ({ article }) => {
           <h2>
             <a href={`/article/${article.slug}`}>{article.title}</a>
           </h2>
+          <p className="text-white">{limitContent(article.content, 30)}</p>
         </div>
       </div>
     </div>

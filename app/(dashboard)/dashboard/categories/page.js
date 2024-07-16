@@ -1,38 +1,36 @@
 'use client'
 import categoryApi from "@/api/categoryApi";
-import DeleteRecordCell from "@/components/DeleteRecordCell";
-import Table from "@/components/table/Table";
-import { TableProvider } from "@/provider/TableProvider";
+import { PaginationTable } from "@/provider/PaginationTable";
 
 const columns = [
   {
-    Header: 'ID',
-    accessor: '_id',
+    name: 'ID',
+    selector: '_id',
   },
   {
-    Header: 'Category Name',
-    accessor: 'categoryName',
+    name: 'Category Name',
+    selector: 'categoryName',
   },
   {
-    Header: 'Description',
-    accessor: 'description',
+    name: 'Description',
+    selector: 'description',
   },
   {
-    Header: 'Date Created',
-    accessor: 'dateCreated',
-    Cell: ({ value }) => new Date(value).toLocaleString('vi-VN'),
+    name: 'Date Created',
+    selector: 'dateCreated',
+    sortable: true,
+    cell: (row) => new Date(row.dateCreated).toLocaleString('vi-VN'),
   },
   {
-    Header: 'Action',
-    id: 'action',
-    Cell: ({ row }) => (
+    name: 'Action',
+    cell: (row) => (
       <div className="d-flex">
-        <a href={`/dashboard/categories/${row.original._id}`} className="btn btn-sm">Edit</a>
-        <DeleteRecordCell onDelete={() => categoryApi.delete(row.original._id)} />
+        <a href={`/dashboard/categories/${row._id}`} className="btn btn-sm">Edit</a>
+        {/* <DeleteRecordCell onDelete={() => categoryApi.delete(row._id)} /> */}
       </div>
     ),
   }
-];
+]
 
 const CategoriesPage = () => {
   return (
@@ -43,9 +41,10 @@ const CategoriesPage = () => {
         </h3>
         <a href="/dashboard/categories/create" className="btn btn-primary btn-sm">Create</a>
       </div>
-      <TableProvider columns={columns} tableKey="categories" fetcher={() => categoryApi.getAll()}>
+      {/* <TableProvider columns={columns} tableKey="categories" fetcher={() => categoryApi.getAll()}>
         <Table />
-      </TableProvider>
+      </TableProvider> */}
+      <PaginationTable columns={columns} tableKey="categories" fetcher={() => categoryApi.getAll()} />
     </div>
   );
 }

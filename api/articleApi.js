@@ -22,6 +22,11 @@ const articleApi = {
   getRelatedArticles: (slug) => {
     return api.get(`/articles/related/${slug}`);
   },
+  reviewArticle: (state) => {
+    return api.put(`/articles/review`, {
+      state
+    });
+  }
 };
 
 export default articleApi;

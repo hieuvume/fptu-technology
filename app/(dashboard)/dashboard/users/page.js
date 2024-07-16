@@ -1,45 +1,39 @@
 'use client';
 import userApi from "@/api/userApi";
-import Table from "@/components/table/Table";
-import { TableProvider } from "@/provider/TableProvider";
+import { PaginationTable } from "@/provider/PaginationTable";
 
 const columns = [
   {
-    Header: 'ID',
-    accessor: '_id',
+    name: 'Full Name',
+    selector: 'fullName',
   },
   {
-    Header: 'Full Name',
-    accessor: 'fullName',
+    name: 'Email',
+    selector: 'email',
   },
   {
-    Header: 'Email',
-    accessor: 'email',
+    name: 'Date of Birth',
+    selector: 'dateOfBirth',
+    cell: (row) => row.dateOfBirth ? new Date(row.dateOfBirth).toLocaleDateString('vi-VN') : '',
   },
   {
-    Header: 'Date of Birth',
-    accessor: 'dateOfBirth',
-    Cell: ({ value }) => value ? new Date(value).toLocaleDateString('vi-VN') : '',
+    name: 'Role',
+    selector: 'role',
   },
   {
-    Header: 'Role',
-    accessor: 'role',
+    name: 'Date Registered',
+    selector: 'dateRegistered',
+    cell: (row) => row.dateRegistered ? new Date(row.dateRegistered).toLocaleString('vi-VN') : '',
   },
   {
-    Header: 'Date Registered',
-    accessor: 'dateRegistered',
-    Cell: ({ value }) => value ? new Date(value).toLocaleString('vi-VN') : '',
-  },
-  {
-    Header: 'Action',
-    id: 'action',
-    Cell: ({ row }) => (
+    name: 'Action',
+    cell: (row) => (
       <div className="d-flex">
-        <a href={`/dashboard/users/${row.original._id}`} className="btn btn-sm btn-warning">Edit</a>
+        <a href={`/dashboard/users/${row._id}`} className="btn btn-sm btn-warning">Edit</a>
       </div>
     ),
   }
-];
+]
 
 const UsersPage = () => {
   return (
@@ -50,9 +44,7 @@ const UsersPage = () => {
         </h3>
         <a href="/dashboard/users/create" className="btn btn-primary btn-sm">Create</a>
       </div>
-      <TableProvider columns={columns} tableKey="users" fetcher={() => userApi.getAll()}>
-        <Table />
-      </TableProvider>
+      <PaginationTable columns={columns} tableKey="users" fetcher={() => userApi.getAll()} />
     </div>
   );
 }

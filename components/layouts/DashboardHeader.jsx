@@ -4,7 +4,7 @@ import DashboardWrapper from "./DashboardWrapper";
 import useAuth from "@/provider/AuthProvider";
 
 const DashboardHeader = () => {
-  const { isAdmin, isModerator, isAuthor } = useAuth();
+  const { isAdmin, isModerator, isAuthor, isContributor } = useAuth();
   return (
     <DashboardWrapper>
       <div className="header-bottom header-sticky">
@@ -35,12 +35,17 @@ const DashboardHeader = () => {
                         </li>
                       </>
                     )}
-                    {(isAdmin() || isModerator() || isAuthor()) && (
+                    {(isAdmin() || isAuthor() || isContributor()) && (
                       <li>
                         <Link href="/dashboard/articles">Articles</Link>
                       </li>
                     )}
-                    {(isAdmin()) && (
+                    {isModerator() && (
+                      <li>
+                        <Link href="/dashboard/articles/pending">Pending Articles</Link>
+                      </li>
+                    )}
+                    {isAdmin() && (
                       <li>
                         <Link href="/dashboard/applications">Applications</Link>
                       </li>

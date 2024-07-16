@@ -3207,10 +3207,17 @@ hr {
   width: 100%
 }
 
+.what-img img {
+  height: 250px; /* Chiều cao cố định */
+  width: 100%; /* Đảm bảo ảnh chiếm hết chiều rộng của container */
+  object-fit: cover; /* Cắt bỏ phần thừa nếu ảnh cao hơn */
+  overflow: hidden; /* Ẩn phần thừa */
+}
+
 .whats-news-area .whats-news-caption .single-what-news .what-cap,
 .about-area .whats-news-caption .single-what-news .what-cap,
 .contact-section .whats-news-caption .single-what-news .what-cap {
-  padding: 25px 20px 10px 0;
+  padding: 15px 15px 10px 0;
   background: #fff;
   position: absolute;
   bottom: -63px;
@@ -3233,7 +3240,7 @@ hr {
   font-weight: 600;
   padding: 10px 15px;
   line-height: 1;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   display: inline-block
 }
 
