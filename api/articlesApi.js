@@ -18,6 +18,9 @@ const articlesApi = {
   },
   approveArticle: (data) => {
     return api.put(`/dashboard/pending/${data._id}`, data)
+  },
+  searchArticles: (query) => {
+    return api.get(`/articles/search/articles?title=${query}`);
   }
 }
 

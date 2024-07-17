@@ -1,9 +1,23 @@
 "use client";
+import articlesApi from "@/api/articlesApi";
 import useAuth from "@/provider/AuthProvider";
 import Link from "next/link";
+import { useState } from "react";
 
 const DashboardWrapper = ({ children }) => {
   const { isAuthenticated, user, logout } = useAuth();
+  const [searchTitle, setSearchTitle] = useState("");
+
+  const handleSearch = async (event) => {
+    if (event.key === "Enter") {
+      try {
+        const articles = await articlesApi.searchArticles(searchTitle);
+        console.log(articles);
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      }
+    }
+  };
 
   return (
     <header>
@@ -90,7 +104,10 @@ const DashboardWrapper = ({ children }) => {
                         backgroundColor: "#f0f0f5",
                         fontSize: "14px"
                       }}
-                      placeholder="Tìm sản các bài báo công nghệ"
+                      placeholder="Tìm kiếm các bài báo công nghệ"
+                      value={searchTitle}
+                      onChange={(e) => setSearchTitle(e.target.value)}
+                      onKeyPress={handleSearch}
                     />
                   </div>
                 </div>

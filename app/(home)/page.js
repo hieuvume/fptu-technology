@@ -32,6 +32,9 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
+                <div>
+                  <h3>Articles search found</h3>
+                </div>
               </div>
               <div className="col-lg-4">
                 {data?.small?.map((article, index) => (
