@@ -19,7 +19,9 @@ const CreateArticlesPage = () => {
   return (
     <div className="container mt-4">
       <h4>Tạo bài viết</h4>
-      <ArticlesEditor articles={undefined} onSubmit={onSubmit} />
+      <ArticlesEditor articles={{
+        
+      }} onSubmit={onSubmit} />
     </div>
   );
 };

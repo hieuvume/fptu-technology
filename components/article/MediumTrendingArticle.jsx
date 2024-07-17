@@ -1,13 +1,6 @@
-const MediumTrendingArticle = ({ article }) => {
-  const limitContent = (content) => {
-    const words = content.split(' ');
-    if (words.length > 20) {
-      return words.slice(0, 20).join(' ') + '...'; 
-    } else {
-      return content;
-    }
-  };
+import { limitContent } from "@/utils";
 
+const MediumTrendingArticle = ({ article }) => {
   return (
     <div className="col-lg-4">
       <div className="single-bottom mb-35">
@@ -19,7 +12,7 @@ const MediumTrendingArticle = ({ article }) => {
           <h4>
             <a href={`/article/${article.slug}`}>{article.title}</a>
           </h4>
-          <p>{limitContent(article.content, 10)}</p>
+          <p>{limitContent(article.short_content, 10)}</p>
         </div>
       </div>
     </div>

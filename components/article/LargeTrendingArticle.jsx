@@ -10,7 +10,7 @@ const LargeTrendingArticle = ({ article }) => {
           <h2>
             <a href={`/article/${article.slug}`}>{article.title}</a>
           </h2>
-          <p className="text-white">{limitContent(article.content, 30)}</p>
+          <p className="text-white">{limitContent(article.short_content, 30)}</p>
         </div>
       </div>
     </div>

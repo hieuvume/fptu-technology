@@ -1,3 +1,5 @@
+import { limitContent } from "@/utils";
+
 const NewArticle = ({ article }) => {
   return (
     <div className="col-lg-4 col-md-4">
@@ -10,6 +12,7 @@ const NewArticle = ({ article }) => {
           <h4>
             <a href={`/article/${article.slug}`}>{article.title}</a>
           </h4>
+          <p>{limitContent(article.short_content)}</p>
         </div>
       </div>
     </div>

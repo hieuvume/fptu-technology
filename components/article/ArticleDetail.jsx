@@ -1,11 +1,10 @@
 "use client";
+import articleApi from "@/api/articleApi";
 import useSWR from "swr";
 import CommentForm from "./CommentForm";
-import articleApi from "@/api/articleApi";
-import SocialShare from "./SocialShare";
-import Link from "next/link";
-import RelatedArticle from "./RelatedArticle";
 import CommentList from "./CommentList";
+import RelatedArticle from "./RelatedArticle";
+import SocialShare from "./SocialShare";
 
 const ArticleDetail = ({ article }) => {
   const { data, isLoading } = useSWR(`/articles/related/${article.slug}`, () =>

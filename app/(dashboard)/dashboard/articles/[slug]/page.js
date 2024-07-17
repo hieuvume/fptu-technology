@@ -21,7 +21,10 @@ const ArticlesEditPage = ({ params: { slug } }) => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <ArticlesEditor articles={data} onSubmit={onSubmit} />
+        <ArticlesEditor articles={{
+          ...data,
+          category: data.category._id,
+        }} onSubmit={onSubmit} />
       )}
     </div>
   )

@@ -16,8 +16,8 @@ const validationSchema = Yup.object().shape({
   content: Yup.string().required("Content is required"),
   short_content: Yup.string().required("Short content is required"),
   category: Yup.string().required("Category is required"),
-  published: Yup.boolean().required("Published status is required"),
   slug: Yup.string().required("Slug is required"),
+  published: Yup.boolean().required("Published is required"),
 });
 
 const ArticlesEditor = ({ articles, onSubmit, isReview, onReview }) => {
@@ -64,8 +64,9 @@ const ArticlesEditor = ({ articles, onSubmit, isReview, onReview }) => {
             actions.setSubmitting(false);
           }}
         >
-          {({ values, handleSubmit, setFieldValue, isSubmitting }) => (
+          {({ errors, values, handleSubmit, setFieldValue, isSubmitting }) => (
             <Form onSubmit={handleSubmit}>
+              {JSON.stringify(errors)}
               <InputField
                 label="Title"
                 name="title"
@@ -92,7 +93,7 @@ const ArticlesEditor = ({ articles, onSubmit, isReview, onReview }) => {
                 <ReactQuill
                   ref={reactQuillRef}
                   theme="snow"
-                  value={values.content}
+                  value={values?.content}
                   onChange={(stringifiedHtmlValue) => {
                     setFieldValue("content", stringifiedHtmlValue);
                   }}
@@ -123,7 +124,7 @@ const ArticlesEditor = ({ articles, onSubmit, isReview, onReview }) => {
                   }}
                 />
               </div>
-              {values.thumbnail && (
+              {values?.thumbnail && (
                 <div className="form-group">
                   <img
                     src={values.thumbnail}
@@ -133,6 +134,22 @@ const ArticlesEditor = ({ articles, onSubmit, isReview, onReview }) => {
                   />
                 </div>
               )}
+
+              <div className="form-group">
+                <label htmlFor="published">Published</label>
+                <div class="primary-switch">
+                  <input
+                    type="checkbox"
+                    id="default-switch"
+                    name="published"
+                    checked={values.published}
+                    onChange={(e) => {
+                      setFieldValue("published", e.target.checked);
+                    }}
+                  />
+                  <label for="default-switch"></label>
+                </div>
+              </div>
               {isReview ? (
                 <>
                   <button

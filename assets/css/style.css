@@ -6727,3 +6727,11 @@ del {
 .cursor-pointer {
   cursor: pointer
 }
+
+.about-prea img {
+  width: 100%
+}
+
+.about-area a {
+  color: #222
+}
