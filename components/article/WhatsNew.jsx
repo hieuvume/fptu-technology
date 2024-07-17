@@ -76,7 +76,7 @@ const WhatsNew = () => {
                           <div className="text-center">Loading...</div>
                         )}
                         {articles?.map((article) => (
-                          <NewArticle index={article._id} article={article} />
+                          <NewArticle key={article._id} article={article} />
                         ))}
                       </div>
                     </div>
