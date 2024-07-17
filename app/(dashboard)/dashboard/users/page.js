@@ -32,6 +32,26 @@ const columns = [
         <a href={`/dashboard/users/${row._id}`} className="btn btn-sm btn-warning">Edit</a>
       </div>
     ),
+  },
+  {
+    name: 'Ban User',
+    cell: (row) => {
+      console.log(row);
+
+      if (row.status === true) {
+        return (
+            <div className="d-flex">
+              <button onClick={() => userApi.banUser(row._id)} className="btn btn-sm btn-danger">Ban</button>
+            </div>
+          )
+      }
+
+      return (
+        <div className="d-flex">
+          <button onClick={() => userApi.banUser(row._id)} className="btn btn-sm btn-danger">UnBan</button>
+        </div>
+      )
+    },
   }
 ]
 

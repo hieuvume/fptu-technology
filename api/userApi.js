@@ -29,6 +29,9 @@ const userApi = {
       }
     });
   },
+  banUser: (data) => {
+    return api.put(`/users/ban/${data}`);
+  }
 };
 
 export default userApi;
