@@ -26,6 +26,9 @@ const articlesApi = {
     return api.put(`/articles/${id}/review`, {
       state
     });
+  },
+  searchArticles: (query) => {
+    return api.get(`/articles/search/articles?title=${query}`);
   }
 }
 

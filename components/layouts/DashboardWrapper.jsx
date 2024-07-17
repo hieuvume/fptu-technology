@@ -1,9 +1,27 @@
 "use client";
+import articlesApi from "@/api/articlesApi";
 import useAuth from "@/provider/AuthProvider";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const DashboardWrapper = ({ children }) => {
   const { isAuthenticated, user, logout } = useAuth();
+  const [searchTitle, setSearchTitle] = useState("");
+  const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const handleSearch = (event) => {
+    if (event.key === "Enter") {
+      router.push(`/search?title=${searchTitle}`);
+    }
+  };
+
+  if (!isMounted) return null;
 
   return (
     <header>
@@ -20,7 +38,7 @@ const DashboardWrapper = ({ children }) => {
                         <>
                           <li>
                             <Link href="/profile" style={{ fontWeight: "500" }}>
-                              Hello, {user.username}
+                            Hello, {user.username}
                             </Link>
                           </li>
                           {user.role !== "USER" && (
@@ -46,7 +64,7 @@ const DashboardWrapper = ({ children }) => {
                       ) : (
                         <>
                           <li>
-                            <Link
+                          <Link
                               href="/register"
                               style={{ fontWeight: "500" }}
                             >
@@ -74,12 +92,12 @@ const DashboardWrapper = ({ children }) => {
                     <Link href="/">
                       <img src="/assets/img/logo.png" alt="" width={200} />
                     </Link>
-                
+
                   </div>
                 </div>
                 <div className="col-xl-9 col-lg-9 col-md-9">
                   <div className="header-banner f-right ">
-                  <input className="text-center"
+                    <input className="text-center"
                       style={{
                         width: "120%",
                         padding: "10px",
@@ -91,6 +109,8 @@ const DashboardWrapper = ({ children }) => {
                         fontSize: "14px"
                       }}
                       placeholder="Tìm sản các bài báo công nghệ"
+                      onChange={(e) => setSearchTitle(e.target.value)}
+                      onKeyDown={handleSearch}
                     />
                   </div>
                 </div>

@@ -20,8 +20,8 @@ export const formatDate = (dateString) => {
 };
 
 export const limitContent = (content, maxLength = 15) => {
-  const words = content.split(' ');
-  if (words.length > maxLength) {
+  const words = content?.split(' ');
+  if (words?.length > maxLength) {
     return words.slice(0, maxLength).join(' ') + '...';
   } else {
     return content;
