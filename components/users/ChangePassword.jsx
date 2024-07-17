@@ -1,19 +1,14 @@
-'use client';
-
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import authApi from '@/api/authApi';
-import { useRouter } from 'next/router';
 
-
-const ChangePassword = () => {
+const ChangePassword = ({ onSubmit }) => {
   const initialValues = {
     oldPassword: '',
     newPassword: '',
     confirmPassword: '',
   };
-  
+
   const validationSchema = Yup.object({
     oldPassword: Yup.string().required('Vui lòng nhập mật khẩu cũ.'),
     newPassword: Yup.string()
@@ -23,26 +18,6 @@ const ChangePassword = () => {
       .oneOf([Yup.ref('newPassword'), null], 'Xác nhận mật khẩu không khớp.')
       .required('Vui lòng xác nhận mật khẩu mới.'),
   });
-
-  const onSubmit = async (values, { setSubmitting, setErrors, setStatus }) => {
-    try {
-      const response = await authApi.changePassword({
-        currentPassword: values.oldPassword,
-        newPassword: values.newPassword,
-      });
-
-      if (response.success) {
-        setStatus({ success: 'Đổi mật khẩu thành công!' });
-        window.location.href = '/profile';
-      } else {
-        setErrors({ submit: response.message || 'Có lỗi xảy ra.' });
-      }
-    } catch (err) {
-      setErrors({ submit: err.response?.data?.message || 'Có lỗi xảy ra.' });
-    } finally {
-      setSubmitting(false);
-    }
-  };
 
   return (
     <div className="container my-5">
@@ -84,8 +59,11 @@ const ChangePassword = () => {
               />
               <ErrorMessage name="confirmPassword" component="div" className="invalid-feedback" />
             </div>
-            {errors.submit && <div className="text-danger mb-3">{errors.submit}</div>}
-            {status && status.success && <div className="text-success mb-3">{status.success}</div>}
+            {errors.submit && (
+              <div className="alert alert-danger" role="alert">
+                {errors.submit}
+              </div>
+            )}
             <button
               type="submit"
               className="btn btn-primary"
@@ -93,6 +71,11 @@ const ChangePassword = () => {
             >
               Đổi Mật Khẩu
             </button>
+            {status && status.success && (
+              <div className="alert alert-success mt-3" role="alert">
+                {status.success}
+              </div>
+            )}
           </Form>
         )}
       </Formik>

@@ -14,7 +14,7 @@ const authApi = {
     return api.get('/auth/me')
   },
   changePassword:(data)=>{
-    return api.post('/auth/change-password',data)
+    return api.put('/auth/change-password',data)
   }
 }
 

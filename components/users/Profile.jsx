@@ -111,7 +111,17 @@ const Profile = () => {
                     </>
                   )}
                 </div>
+                <div className="d-flex justify-content-center mt-2">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                  onClick={()=>(window.location.href='changepassword')}
+                  >
+                    Change-Password
+                  </button>
+                </div>
               </div>
+
             </div>
           </div>
           <div className="col-lg-8">
